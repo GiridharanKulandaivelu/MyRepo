@@ -3,7 +3,7 @@ var chartData;
 $(function(){
   $.ajax({
 
-    url: 'http://localhost:3300/fuelPrices',
+    url: 'http://52.26.246.176:3300/fuelPrices',
     type: 'GET',
     success : function(data) {
       chartData = data;
