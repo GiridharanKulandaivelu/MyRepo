@@ -5,7 +5,7 @@ var express = require("express");
 var mongodb = require("mongodb");
 
 //MongoDB connection URL - mongodb://host:port/dbName
-var dbHost = "mongodb://52.26.246.176:27017/my_database_name";
+var dbHost = "mongodb://localhost:27017/my_database_name";
 
 //DB Object
 var dbObject;
@@ -89,5 +89,5 @@ app.get("/", function(req, res){
 });
 
 app.listen("3300", function(){
-  console.log('Server up: http://52.26.246.176:3300');
+  console.log('Server up: http://localhost:3300');
 });
