@@ -11,62 +11,62 @@ var MongoClient = mongodb.MongoClient;
  http.createServer(function (req, response) { 
  if(req.method=='POST') 
  { 
-	var body=''; 
-	req.on('data', function (data) 
-		{ 
-		body +=data; 
-		var obj= JSON.parse(body);
-		sys.puts(obj.Type);
-		sys.puts(obj.Name);
-		sys.puts(obj.Value);
-		console.log(body);
-		var url = 'mongodb://localhost:27017/my_database_name';
-		MongoClient.connect(url, function (err, db) 
-		{
-  			if (err) {
-    					console.log('Unable to connect to the mongoDB server. Error:', err);
-    					sys.puts("not connected");
-  					} 
-  			else {
-    					//HURRAY!! We are connected. :)
-    					console.log('Connection established to', url);
-    					sys.puts("connected");
+  var body=''; 
+  req.on('data', function (data) 
+    { 
+    body +=data; 
+    var obj= JSON.parse(body);
+    sys.puts(obj.Type);
+    sys.puts(obj.Name);
+    sys.puts(obj.Value);
+    console.log(body);
+    var url = 'mongodb://localhost:27017/my_database_name';
+    MongoClient.connect(url, function (err, db) 
+    {
+        if (err) {
+              console.log('Unable to connect to the mongoDB server. Error:', err);
+              sys.puts("not connected");
+            } 
+        else {
+              //HURRAY!! We are connected. :)
+              console.log('Connection established to', url);
+              sys.puts("connected");
 
-    					// Get the documents collection
-    					var collection = db.collection('sensordata');
-    					sys.puts("db created");
-    					//Create some users
-    					var user1 = {Type: obj.Type, Name: obj.Name, Value: obj.Value};
-    					//var user2 = {name: 'modulus user', age: 22, roles: ['user']};
-    					//var user3 = {name: 'modulus super admin', age: 92, roles: ['super-admin', 'admin', 'moderator', 'user']};
+              // Get the documents collection
+              var collection = db.collection('sensordata');
+              sys.puts("db created");
+              //Create some users
+              var user1 = {Type: obj.Type, Name: obj.Name, Value: obj.Value};
+              //var user2 = {name: 'modulus user', age: 22, roles: ['user']};
+              //var user3 = {name: 'modulus super admin', age: 92, roles: ['super-admin', 'admin', 'moderator', 'user']};
               if(obj.Type=="TEMPERATURE")
               {
                 if(obj.Value > 30)
                 {
                 thresh="1";
-                console.log("thresh": thresh);
+                
               }
               else
                 thresh="0";
               }
-    					// Insert some users
-    					collection.insert([user1/*, user2, user3*/], function (err, result) {
-      					if (err) {
-        							console.log(err);
-      							 } 
-      					else {
-        						console.log('Inserted %d documents into the "users" collection. The documents inserted with "_id" are:', result.length, result);
-      						 }
-      					//Close connection
-      					db.close();
-    					});
-  				 }
-		});
+              // Insert some users
+              collection.insert([user1/*, user2, user3*/], function (err, result) {
+                if (err) {
+                      console.log(err);
+                     } 
+                else {
+                    console.log('Inserted %d documents into the "users" collection. The documents inserted with "_id" are:', result.length, result);
+                   }
+                //Close connection
+                db.close();
+              });
+           }
+    });
 
 
-		});
-	response.writeHeader(200, {"Content-Type": "text/plain"});  
-    response.write("hi");  
+    });
+  response.writeHeader(200, {"Content-Type": "text/plain"});  
+    response.write("Hi");  
     response.end();  
 /* req.on('end',function(){ 
  var POST = qs.parse(body); 
@@ -77,9 +77,8 @@ var MongoClient = mongodb.MongoClient;
  } 
  else if(req.method=='GET') 
  {
-	 var url_parts = url.parse(req.url,true); 
-	 console.log(url_parts.query); 
+   var url_parts = url.parse(req.url,true); 
+   console.log(url_parts.query); 
  }
  }).listen(8080);
  sys.puts("listening to 8080");
-
