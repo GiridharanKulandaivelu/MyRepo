@@ -66,7 +66,7 @@ var MongoClient = mongodb.MongoClient;
 
 		});
 	response.writeHeader(200, {"Content-Type": "text/plain"});  
-    response.write(thresh);  
+    response.write("hi");  
     response.end();  
 /* req.on('end',function(){ 
  var POST = qs.parse(body); 
