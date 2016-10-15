@@ -41,8 +41,11 @@ var MongoClient = mongodb.MongoClient;
     					//var user3 = {name: 'modulus super admin', age: 92, roles: ['super-admin', 'admin', 'moderator', 'user']};
               if(obj.Type=="TEMPERATURE")
               {
-                if(obj.Value >30)
+                if(obj.Value > 30)
+                {
                 thresh="1";
+                console.log("thresh": thresh);
+              }
               else
                 thresh="0";
               }
